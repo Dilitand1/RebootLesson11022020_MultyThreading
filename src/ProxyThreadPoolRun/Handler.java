@@ -23,7 +23,6 @@ public class Handler implements InvocationHandler,Runnable {
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
         //определяем переменные метода
         List<Class> classes = Arrays.stream(args).map(x->(Class)x.getClass()).collect(Collectors.toList());
-
         //запускаем метод
         for (int i = 0 ;i < countThreads;i++){
             method_ = realObject.getClass().getDeclaredMethod("print", classes.toArray(new Class[0]));
