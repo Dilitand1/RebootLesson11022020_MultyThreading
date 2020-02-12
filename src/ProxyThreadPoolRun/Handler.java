@@ -8,11 +8,11 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class Handler implements InvocationHandler,Runnable {
-    Object realObject;
+    final Object realObject;
     Integer countThreads;
 
-    Method method_;
-    Object[] args_;
+    private Method method_;
+    private Object[] args_;
 
     public Handler(Object realObject,Integer countThreads) {
         this.realObject = realObject;
@@ -32,7 +32,6 @@ public class Handler implements InvocationHandler,Runnable {
             thread.start();
             Thread.sleep(1000);
         }
-
         return null;
     }
 

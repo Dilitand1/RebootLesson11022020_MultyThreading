@@ -12,10 +12,11 @@ public class Main {
     static List<Thread> threadList = new ArrayList<>();
 
     public static void main(String[] args) throws InterruptedException {
-        //Создаем наш класс
+        //Пользовательский класс который будет работать многопоточно
         MyClass myClass = new MyClass("Тестовый текст будет печатать многопоточно в кашу");
-        System.out.println("1 вариант");
+
         //1.Вариант простой:
+        System.out.println("1 вариант");
         //задаем количество потоков
         Integer count = 10;
         for(int i = 0 ;i < count;i++) {
@@ -38,7 +39,7 @@ public class Main {
         MyInterface myInterface = getProxy(myClass,10);
 
         //Запускаем наш метод
-        myInterface.print(String.valueOf("Печатаем текст"));
+        myInterface.print("Печатаем текст");
     }
 
     static MyInterface getProxy(Object myClass,Integer countThreads){
