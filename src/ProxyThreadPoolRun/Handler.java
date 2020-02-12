@@ -7,14 +7,14 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class Handler implements InvocationHandler,Runnable {
+public class Handler implements InvocationHandler, Runnable {
     final Object realObject;
     Integer countThreads;
 
     private Method method_;
     private Object[] args_;
 
-    public Handler(Object realObject,Integer countThreads) {
+    public Handler(Object realObject, Integer countThreads) {
         this.realObject = realObject;
         this.countThreads = countThreads;
     }
@@ -22,9 +22,9 @@ public class Handler implements InvocationHandler,Runnable {
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
         //определяем переменные метода
-        List<Class> classes = Arrays.stream(args).map(x->(Class)x.getClass()).collect(Collectors.toList());
+        List<Class> classes = Arrays.stream(args).map(x -> (Class) x.getClass()).collect(Collectors.toList());
         //запускаем метод
-        for (int i = 0 ;i < countThreads;i++){
+        for (int i = 0; i < countThreads; i++) {
             method_ = realObject.getClass().getDeclaredMethod("print", classes.toArray(new Class[0]));
             args_ = args;
             Thread thread = new Thread(this);
