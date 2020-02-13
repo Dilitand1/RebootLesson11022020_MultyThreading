@@ -67,7 +67,7 @@ public class Main {
         for (int i = 0; i < 5; i++) {
             futureList.add(executorService.submit(new SimpleThread(new MyClass("Поток " + i + " из 2 варианта"))));
         }
-        //ждем когда все выполнится чтобы не пересечься с 3 вариантом
+        //ждем когда все выполнится
         while (true) {
             Thread.sleep(1000);
             Integer optionalI = futureList.stream()
