@@ -25,7 +25,6 @@ public class MyThreadPool {
         }
     }
 
-
     public Queue<Runnable> getQueue() {
         return queue;
     }
@@ -48,6 +47,11 @@ class ThreadWorker implements Runnable {
             Runnable runnable = myThreadPool.getQueue().poll();
             if (runnable != null) {
                 runnable.run();
+            }
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
         }
     }
