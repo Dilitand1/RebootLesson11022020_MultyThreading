@@ -38,9 +38,9 @@ public class Main {
         //2 вариант через ExecutorService
         System.out.println("\n2 вариант");
         List<Future> futureList = new ArrayList<>();
-        ExecutorService executorService = Executors.newCachedThreadPool();
+        ExecutorService executorService = Executors.newFixedThreadPool(3);
         for (int i = 0; i < 10; i++) {
-            futureList.add(executorService.submit(new SimpleThread(new MyClass("Потоки из 2 варианта"))));
+            futureList.add(executorService.submit(new SimpleThread(new MyClass("Поток " + i + " из 2 варианта"))));
         }
         //ждем когда все выполнится чтобы не пересечься с 3 вариантом
         while (true) {

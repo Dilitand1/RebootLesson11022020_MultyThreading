@@ -12,6 +12,7 @@ public class MyClass implements MyInterface {
     }
 
     public void print() throws InterruptedException {
+        Thread.sleep(100);
         System.out.println(initString);
         Thread.sleep(100);
     }
@@ -19,8 +20,8 @@ public class MyClass implements MyInterface {
     public void print(String s) throws InterruptedException {
         char[] chars = s.toCharArray();
         for (char c : chars) {
-            System.out.print(c);
             Thread.sleep(100);
+            System.out.print(c);
         }
         System.out.println("");
     }

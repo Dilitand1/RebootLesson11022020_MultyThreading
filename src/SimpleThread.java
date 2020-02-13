@@ -13,8 +13,8 @@ public class SimpleThread implements Runnable {
     public void run() {
         try {
             System.out.println("Поток " + Thread.currentThread().getName() + " запущен");
-            myClass.print();
             Thread.sleep((long) (Math.random() * 10000) + 1000);
+            myClass.print();
         } catch (InterruptedException e) {
             e.printStackTrace();
         } finally {
