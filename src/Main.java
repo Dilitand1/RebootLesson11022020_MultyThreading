@@ -1,13 +1,16 @@
 import TestClass.MyClass;
 import TestClass.MyInterface;
 import ProxyThreadPoolRun.Handler;
+import ThreadPool.MyThreadPool;
 
 import java.lang.reflect.Proxy;
+import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
 
 public class Main {
 
@@ -52,12 +55,26 @@ public class Main {
             //ExecutorService не сразу завершает потоки, некоторое время ждет.
         }
 
-        //3 вариант через проксю - самодеятельность, попытка универсализировать
+        //3 вариант через проксю - самодеятельность, вспоминаем рефлексию
         //передаем наш класс в проксю и говорим сколько потоков будет запущено
         System.out.println("\n3 вариант");
-        MyInterface myInterface = getProxy(myClass, 10);
+        MyInterface myInterface = getProxy(myClass, 5);
         //Запускаем наш метод
         myInterface.print("Печатаем текст");
+
+        //4 вариант каноничный с хабра
+        TimeUnit.SECONDS.sleep(6);
+        MyThreadPool threadPool = new MyThreadPool(4);
+        for (int i = 0; i < 10; i++) {
+            int finalI = i;
+            threadPool.execute(() -> {
+                try {
+                    myClass.print("Тест №" + finalI);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            });
+        }
     }
 
     static MyInterface getProxy(Object myClass, Integer countThreads) {
